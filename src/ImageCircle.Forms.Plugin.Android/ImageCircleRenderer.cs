@@ -18,6 +18,8 @@ namespace ImageCircle.Forms.Plugin.Droid
     [Preserve(AllMembers = true)]
     public class ImageCircleRenderer : ImageRenderer
     {
+
+        private RectF _bounds;
         /// <summary>
         /// Used for registration with dependency service
         /// </summary>
@@ -69,31 +71,23 @@ namespace ImageCircle.Forms.Plugin.Droid
             try
             {
                 
-                var radius = Math.Min(Width, Height) / 2;
+                var radius = (float)((CircleImage)Element).CornerRadius;
 
                 var borderThickness = (float)((CircleImage)Element).BorderThickness;
 
                 int strokeWidth = 0;
-
+                _bounds = new RectF(0, 0, Width, Height);
                 if (borderThickness > 0)
                 {
                     var logicalDensity = Xamarin.Forms.Forms.Context.Resources.DisplayMetrics.Density;
                     strokeWidth = (int)Math.Ceiling(borderThickness * logicalDensity + .5f);
                 }
-
-                radius -= strokeWidth / 2;
-
-
-               
+                               
 
                 var path = new Path();
-                path.AddCircle(Width / 2.0f, Height / 2.0f, radius, Path.Direction.Ccw);
-
-                
+                path.AddRoundRect(_bounds, radius, radius, Path.Direction.Ccw);                
                 canvas.Save();
                 canvas.ClipPath(path);
-
-               
 
                 var paint = new Paint();
                 paint.AntiAlias = true;
@@ -109,7 +103,7 @@ namespace ImageCircle.Forms.Plugin.Droid
                 canvas.Restore();
 
                 path = new Path();
-                path.AddCircle(Width / 2, Height / 2, radius, Path.Direction.Ccw);
+                path.AddRoundRect(_bounds, radius, radius, Path.Direction.Ccw);
                 
 
                 if(strokeWidth > 0.0f)

@@ -59,7 +59,7 @@ namespace ImageCircle.Forms.Plugin.iOS
             try
             {
                 var min = Math.Min(Element.Width, Element.Height);
-                Control.Layer.CornerRadius = (nfloat)(min / 2.0);
+                Control.Layer.CornerRadius = ((CircleImage)Element).CornerRadius;
                 Control.Layer.MasksToBounds = false;
                 Control.BackgroundColor = ((CircleImage)Element).FillColor.ToUIColor();
                 Control.ClipsToBounds = true;

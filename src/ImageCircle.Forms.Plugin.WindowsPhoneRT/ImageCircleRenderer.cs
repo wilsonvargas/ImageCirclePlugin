@@ -66,7 +66,7 @@ namespace ImageCircle.Forms.Plugin.WindowsPhoneRT
 
 
 
-            var min = Math.Min(Element.Width, Element.Height);
+            var min = ((CircleImage)Element).CornerRadius;
             if (min / 2.0f <= 0)
                 return;
 

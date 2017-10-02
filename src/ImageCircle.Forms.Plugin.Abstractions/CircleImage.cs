@@ -8,6 +8,24 @@ namespace ImageCircle.Forms.Plugin.Abstractions
     /// </summary>
     public class CircleImage : Image
     {
+
+        /// <summary>
+        /// Thickness property of border
+        /// </summary>
+        public static readonly BindableProperty CornerRadiusProperty =
+          BindableProperty.Create(propertyName: nameof(CornerRadius),
+              returnType: typeof(int),
+              declaringType: typeof(CircleImage),
+              defaultValue: 0);
+
+        /// <summary>
+        /// Border thickness of circle image
+        /// </summary>
+        public int CornerRadius
+        {
+            get { return (int)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
         /// <summary>
         /// Thickness property of border
         /// </summary>
